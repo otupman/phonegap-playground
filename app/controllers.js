@@ -8,6 +8,16 @@
       console.log('TodoCtrl::addTodo - received!');
       $scope.todos.push({text:args.text, done:false});
     });
+    
+    $scope.moreIndex = 0;
+    
+    $scope.generateMore = function() {
+      console.log('Generating more items');
+      for(var i = $scope.moreIndex; i < $scope.moreIndex + 50; i++) {
+        $scope.todos.push({text: 'Item ' + i, done: true});
+      }
+      $scope.moreIndex = i;
+    };
 
     $scope.remaining = function() {
       var count = 0;
