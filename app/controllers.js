@@ -1,5 +1,19 @@
 (function(controllers) {
-  controllers.controller('TodoCtrl', ['$scope', function TodoCtrl($scope) {
+  controllers.controller('TodoCtrl', ['$scope', '$http', function TodoCtrl($scope, $http) {
+    $scope.status = "Never started";
+    
+    $scope.longLoad = function() {
+      $scope.status = 'Preping request';
+      $http({method: 'GET', url: 'http://192.168.0.4:3000/users'})
+        .success(function(result) {
+          $scope.status = 'Request successful';
+        })
+        .error(function(result) {
+          $scope.status = 'Request failed (but that is okay)';
+        });
+      $scope.status = 'Request in progress';
+    };
+    
     $scope.todos = [
       {text:'learn angular', done:true},
       {text:'build an angular app', done:false}];

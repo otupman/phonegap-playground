@@ -11,13 +11,29 @@
     </head>
 
     <body>
-        <section id="main" data-transition="slide">
+      
+      <aside id="someAside">
+        <header></header>
+        <article class="active">
+          <ul>
+            <li>Some item</li>
+            <li>Other item</li>
+            <li>Final item</li>
+          </ul>
+        </article>
+      </aside>
+        <section id="main" data-transition="slide" ng-controller="TodoCtrl">
             <header data-title="Todo Example">
+              <nav class="left">
+                <a lab-aside="someAside">Aside</a>
+                <a lab-tap="longLoad()">Start load</a>
+              </nav>
                 <nav class="right">
                     <a href="add-todo" data-icon="plus"></a>
                  </nav>
             </header>
-            <article class="active list indented scroll" ng-controller="TodoCtrl" id="main">
+            <article class="active list indented scroll"  id="main">
+                <span>Load status: {{status}}</span>
                  <span class="remainingLabel">{{remaining()}} of {{todos.length}} remaining</span>
                 [ <a lab-tap="archive()" class="button archiveButton">archive</a> ]
                 <ul>
