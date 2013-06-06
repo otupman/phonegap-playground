@@ -1,5 +1,6 @@
 (function(controllers) {
   controllers.controller('TodoCtrl', ['$scope', function TodoCtrl($scope) {
+    var self = this;
     $scope.todos = [
       {text:'learn angular', done:true},
       {text:'build an angular app', done:false}];
@@ -13,11 +14,31 @@
     
     $scope.generateMore = function() {
       console.log('Generating more items');
-      for(var i = $scope.moreIndex; i < $scope.moreIndex + 50; i++) {
-        $scope.todos.push({text: 'Item ' + i, done: true});
+      if (self.isScrolledToBottom(self.rowScrollView())) {
+        for(var i = $scope.moreIndex; i < $scope.moreIndex + 20; i++) {
+          $scope.todos.push.apply($scope.todos, [{text: 'Item ' + i, done: true}]);
+        }
+        $scope.moreIndex = i;
       }
-      $scope.moreIndex = i;
+
+      window.setTimeout($scope.generateMore, 1000);
     };
+
+    self.rowScrollView = function() { 
+      console.log('rowscrollview');
+      console.log($$);
+      return $$('#todoList')[0];
+    };
+
+    self.isScrolledToBottom =  function(view) {
+      console.log(view.scrollTop);
+      console.log(view.offsetHeight);
+      console.log(view.scrollHeight);
+      var startLoadingOffset = 50;
+      return view.scrollTop + view.offsetHeight + startLoadingOffset >= view.scrollHeight;
+    };
+
+    window.setTimeout($scope.generateMore, 1000);
 
     $scope.remaining = function() {
       var count = 0;
