@@ -93,7 +93,8 @@ module.exports = function (grunt) {
       },
       'setup-android': {
         command: [
-          process.env.CORDOVA_HOME + '/lib/android/bin/create <%=deploy.android.root%> com.centralway.todoapp TodoApp'
+          process.env.CORDOVA_HOME + '/lib/android/bin/create <%=deploy.android.root%> com.centralway.todoapp TodoApp',
+          'cp <%=deploy.android.root%>/assets/www/cordova-2.7.0.js <%=deploy.android.root%>/assets/www/phonegap.js'
         ].join('&&')
       },
       'deploy-android-device': {
