@@ -1,0 +1,33 @@
+{
+  "name": "phonegap-playground",
+  "version": "0.0.1",
+  "description": "A playground in PhoneGap for testing",
+  "main": "Gruntfile.js",
+  "devDependencies": {
+    "bower": "",
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "",
+    "grunt-jade": "",
+    "jade": "",
+    "grunt-contrib-copy": "",
+    "grunt-contrib-compress": "",
+    "grunt-contrib-csslint": "",
+    "grunt-karma": "~0.4.4",
+    "karma": "~0.8.5",
+    "needle": "",
+    "grunt-phonegap-build": "https://github.com/centralway/grunt-phonegap-build/tarball/master",
+    "grunt-yui-compressor": "",
+    "grunt-contrib-clean": "",
+    "grunt-contrib-htmlmin": "",
+    "grunt-contrib-sass": "",
+    "grunt-shell": "",
+    "node-sass": "",
+    "express": "3.0.0",
+    "grunt-contrib-sass": "~0.3.0"
+  },
+  "author": {
+    "name": "Oliver Tupman",
+    "email": "oliver.tupman@centralway.com"
+  },
+  "readmeFilename": "README.md"
+}

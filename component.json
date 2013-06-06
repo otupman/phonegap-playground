@@ -1,0 +1,10 @@
+{
+  "name": "phonegap-playground",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.0.6",
+    "lungo": "~2.1.0",
+    "lab-unstable": "0.1.4",
+    "moment": "~2.0.0"
+  }
+}
