@@ -1,5 +1,5 @@
 (function(controllers) {
-  controllers.controller('TodoCtrl', ['$scope', function TodoCtrl($scope) {
+  controllers.controller('TodoCtrl', ['$scope', '$window', function TodoCtrl($scope, $window) {
     var self = this;
     $scope.todos = [
       {text:'learn angular', done:true},
@@ -11,22 +11,46 @@
     });
     
     $scope.moreIndex = 0;
+
+    self.onDeviceReady = function() {
+      console.log('-----device is ready!!!!!!!');
+      $window.document.addEventListener("pause", self.onPause, false);      
+    };
+
+    self.onPause = function() {
+      console.log('-----pause baby pause!!!!!!!');
+    };
+
+    //needs to be here because onDeviceReady is not defined until this point
+    $window.document.addEventListener("deviceready", self.onDeviceReady, false);
     
     $scope.generateMore = function() {
-      console.log('Generating more items');
+      
       if (self.isScrolledToBottom(self.rowScrollView())) {
-        for(var i = $scope.moreIndex; i < $scope.moreIndex + 20; i++) {
-          $scope.todos.push.apply($scope.todos, [{text: 'Item ' + i, done: true}]);
-        }
-        $scope.moreIndex = i;
+        console.log('Generating more items');
+        $scope.$apply(function() {
+          for(var i = $scope.moreIndex; i < $scope.moreIndex + 5; i++) {          
+            $scope.todos.push.apply($scope.todos, [{text: 'Item ' + i, done: true}]);
+          }
+
+          console.log('items so far in the scope: ' + $scope.todos.length);
+          console.log('items so far in the html: ' + $$('#todoList .todoItem').length);
+          $scope.moreIndex = i;  
+        });
       }
 
-      window.setTimeout($scope.generateMore, 1000);
+      $window.setTimeout($scope.generateMore, 2000);
+    };
+
+    $scope.addMore = function() {
+      for(var i = $scope.moreIndex; i < $scope.moreIndex + 5; i++) {
+        $scope.todos.push.apply($scope.todos, [{text: 'Item ' + i, done: true}]);
+      }
+
+      $scope.moreIndex = i;
     };
 
     self.rowScrollView = function() { 
-      console.log('rowscrollview');
-      console.log($$);
       return $$('#todoList')[0];
     };
 
@@ -38,7 +62,7 @@
       return view.scrollTop + view.offsetHeight + startLoadingOffset >= view.scrollHeight;
     };
 
-    window.setTimeout($scope.generateMore, 1000);
+    $window.setTimeout($scope.generateMore, 1000);
 
     $scope.remaining = function() {
       var count = 0;

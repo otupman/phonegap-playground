@@ -14,7 +14,7 @@
     <section id="main" data-transition="slide" ng-controller="TodoCtrl">
       <header data-title="Todo Example">
         <nav class="left">
-          <a lab-tap="generateMore()" data-icon="plus">Moooore! ({{moreIndex}} - {{moreIndex+50}})</a>
+          <a lab-tap="addMore()" data-icon="plus">More! ({{moreIndex}} - {{moreIndex+5}})</a>
         </nav>
         <nav class="right">
           <a href="add-todo" data-icon="plus"></a>
@@ -25,7 +25,7 @@
          <span class="remainingLabel">{{remaining()}} of {{todos.length}} remaining</span>
         [ <a lab-tap="archive()" class="button archiveButton">archive</a> ]
         <ul>
-          <li ng-repeat="todo in todos" lab-swipe-left="markAsDone(todo)" lab-swipe-right="markAsNotDone(todo)">
+          <li class="todoItem" ng-repeat="todo in todos" lab-swipe-left="markAsDone(todo)" lab-swipe-right="markAsNotDone(todo)">
             <input type="checkbox" ng-model="todo.done">
             <span class="done-{{todo.done}}" >{{todo.text}}</span>
           </li>
@@ -53,6 +53,7 @@
     <script type="text/javascript" src="components/angular/angular.js"></script>
     <script type="text/javascript" src="components/lab-unstable/lungo-angular-bridge.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="cordova-2.7.0.js"></script>
     <script type="text/javascript" src="controllers.js"></script>
   </body>
 
